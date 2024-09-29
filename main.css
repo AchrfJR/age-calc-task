@@ -1,0 +1,125 @@
+/* Load custom fonts */
+@font-face {
+    font-family: 'Poppins';
+    src: url('/mnt/data/Poppins-Regular.ttf') format('truetype'),
+        url('/mnt/data/Poppins-BoldItalic.ttf') format('truetype'),
+        url('/mnt/data/Poppins-ExtraBold.ttf') format('truetype'),
+        url('/mnt/data/Poppins-Italic.ttf') format('truetype'),
+        url('/mnt/data/Poppins-BoldItalic.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* General styles */
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f0f0f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+/* Card styling */
+.card {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 20px 20px 130px 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    max-width: 90%; /* Changed to percentage for responsiveness */
+    width: 500px;   /* Set a max width */
+}
+
+h1 {
+    text-align: center;
+    font-size: 2rem;
+    color: #3B3B3B;
+}
+
+form {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Input group styling */
+.input-group {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.input-group div {
+    flex: 1; /* Make all input containers take equal width */
+}
+
+input {
+    padding: 0.8rem;
+    border: 1px solid hsl(0, 0%, 80%);
+    border-radius: 10px;
+    width: 100%; /* Full width for responsiveness */
+    box-sizing: border-box; /* Ensure padding and borders are included in width */
+}
+
+label {
+    font-size: 0.9rem;
+    color: hsl(0, 0%, 44%);
+}
+
+/* Divider styling */
+.divider {
+    position: relative;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-top: 1.5rem;
+}
+
+hr {
+    flex-grow: 1;
+    border: none;
+    border-top: 1px solid hsl(0, 0%, 80%);
+    margin: 1.5rem 0;
+}
+
+.arrow-icon {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background-color: #6A5AE0;
+    display: inline-block;
+    margin-left: 10px;
+}
+
+/* Output section */
+#output {
+    margin-top: 2rem;
+    text-align: left;
+    font-weight: bold;
+}
+
+.age-output {
+    font-size: 4rem;
+    color: #6A5AE0;
+    margin-right: 10px;
+}
+
+.age-label {
+    font-size: 4rem;
+    color: black;
+    margin-right: 10px;
+}
+
+#output p {
+    font-size: 1.5rem;
+    margin: 0.5rem 0;
+}
+
+/* Attribution */
+.attribution {
+    font-size: 0.8rem;
+    text-align: center;
+    margin-top: 2rem;
+}
