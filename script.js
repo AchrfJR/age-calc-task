@@ -23,8 +23,8 @@ function validateInputs() {
         monthInput.value = ""; // Clear the input if invalid
     }
 
-    // Validate year input (positive number only)
-    if (year < 1 || isNaN(year)) {
+    // Validate year input (1924-2024)
+    if (year < 1924 || year > 2024 || isNaN(year)) {
         yearInput.value = ""; // Clear the input if invalid
     }
 
@@ -37,6 +37,7 @@ function validateInputs() {
         displayEmptyAge(); // If inputs are invalid, reset the display
     }
 }
+
 
 function isValidDate(day, month, year) {
     // Check if date is valid by constructing a Date object and checking its properties
