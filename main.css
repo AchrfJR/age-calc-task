@@ -68,6 +68,15 @@ label {
     color: hsl(0, 0%, 44%);
 }
 
+/* Error styles */
+.error {
+    border-color: red !important; /* Change border color to red */
+}
+
+label.error {
+    color: red; /* Change label color to red */
+}
+
 /* Divider styling */
 .divider {
     position: relative;

@@ -1,16 +1,15 @@
-document.getElementById("day").addEventListener("input", validateInputs);
-document.getElementById("month").addEventListener("input", validateInputs);
-document.getElementById("year").addEventListener("input", validateInputs);
-
 // Add event listeners to prevent non-numeric input
 document.getElementById("day").addEventListener("input", restrictNonNumeric);
 document.getElementById("month").addEventListener("input", restrictNonNumeric);
 document.getElementById("year").addEventListener("input", restrictNonNumeric);
 
+// Event listener to trigger calculation when arrow icon is clicked
+document.querySelector(".arrow-icon").addEventListener("click", validateInputs);
+
 // Function to restrict non-numeric input
 function restrictNonNumeric(e) {
     const input = e.target.value;
-    e.target.value = input.replace(/\D/g, ""); // Replace non-numeric characters with an empty string
+    e.target.value = input.replace(/[^0-9]/g, ""); // Replace non-numeric characters with an empty string
 }
 
 function validateInputs() {
@@ -25,38 +24,70 @@ function validateInputs() {
 
     const currentYear = new Date().getFullYear(); // Dynamically get the current year
 
+    // Reset error styles
+    resetErrorStyles();
+
+    let isValid = true;
+
     // Validate day input (1-31)
     if (day < 1 || day > 31) {
         dayInput.value = ""; // Clear the input if invalid
+        isValid = false;
     }
 
     // Validate month input (1-12)
     if (month < 1 || month > 12) {
         monthInput.value = ""; // Clear the input if invalid
+        isValid = false;
     }
 
     // Validate year input (1924-current year)
     if (year < 1924 || year > currentYear || isNaN(year)) {
         yearInput.value = ""; // Clear the input if invalid
+        isValid = false;
     }
 
     // If all inputs are valid, calculate and display age
-    if (isValidDate(day, month, year)) {
-        const birthDate = new Date(`${year}-${month}-${day}`);
+    if (isValid && isValidDate(day, month, year)) {
+        const birthDate = new Date(year, month - 1, day); // Month is 0-based
         const age = calculateAge(birthDate);
         displayAge(age);
     } else {
         displayEmptyAge(); // If inputs are invalid, reset the display
+        markInvalidFields(dayInput, monthInput, yearInput); // Mark invalid fields
     }
 }
 
+function resetErrorStyles() {
+    const inputs = [document.getElementById("day"), document.getElementById("month"), document.getElementById("year")];
+    const labels = document.querySelectorAll("label");
+
+    inputs.forEach((input) => {
+        input.classList.remove("error");
+    });
+
+    labels.forEach((label) => {
+        label.classList.remove("error");
+    });
+}
+
+function markInvalidFields(...inputs) {
+    inputs.forEach(input => {
+        input.classList.add("error");
+        const label = document.querySelector(`label[for="${input.id}"]`);
+        if (label) {
+            label.classList.add("error");
+        }
+    });
+}
+
 function isValidDate(day, month, year) {
-    const date = new Date(`${year}-${month}-${day}`);
+    const date = new Date(year, month - 1, day); // Month is 0-based
     return (
         date &&
-        date.getFullYear() == year &&
-        date.getMonth() + 1 == month &&
-        date.getDate() == day
+        date.getFullYear() === year &&
+        date.getMonth() + 1 === month && // JavaScript months are 0-based
+        date.getDate() === day
     );
 }
 
@@ -90,3 +121,6 @@ function displayEmptyAge() {
     document.querySelectorAll(".age-output")[1].textContent = '--';
     document.querySelectorAll(".age-output")[2].textContent = '--';
 }
+
+
+
