@@ -1,7 +1,17 @@
-// Automatically trigger age calculation whenever inputs change
 document.getElementById("day").addEventListener("input", validateInputs);
 document.getElementById("month").addEventListener("input", validateInputs);
 document.getElementById("year").addEventListener("input", validateInputs);
+
+// Add event listeners to prevent non-numeric input
+document.getElementById("day").addEventListener("input", restrictNonNumeric);
+document.getElementById("month").addEventListener("input", restrictNonNumeric);
+document.getElementById("year").addEventListener("input", restrictNonNumeric);
+
+// Function to restrict non-numeric input
+function restrictNonNumeric(e) {
+    const input = e.target.value;
+    e.target.value = input.replace(/\D/g, ""); // Replace non-numeric characters with an empty string
+}
 
 function validateInputs() {
     const dayInput = document.getElementById("day");
@@ -41,12 +51,11 @@ function validateInputs() {
 }
 
 function isValidDate(day, month, year) {
-    // Check if date is valid by constructing a Date object and checking its properties
     const date = new Date(`${year}-${month}-${day}`);
     return (
-        date && 
-        date.getFullYear() == year && 
-        date.getMonth() + 1 == month && // JavaScript months are 0-based
+        date &&
+        date.getFullYear() == year &&
+        date.getMonth() + 1 == month &&
         date.getDate() == day
     );
 }
@@ -81,4 +90,3 @@ function displayEmptyAge() {
     document.querySelectorAll(".age-output")[1].textContent = '--';
     document.querySelectorAll(".age-output")[2].textContent = '--';
 }
-
