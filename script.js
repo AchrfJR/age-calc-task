@@ -13,6 +13,8 @@ function validateInputs() {
     const month = parseInt(monthInput.value);
     const year = parseInt(yearInput.value);
 
+    const currentYear = new Date().getFullYear(); // Dynamically get the current year
+
     // Validate day input (1-31)
     if (day < 1 || day > 31) {
         dayInput.value = ""; // Clear the input if invalid
@@ -23,8 +25,8 @@ function validateInputs() {
         monthInput.value = ""; // Clear the input if invalid
     }
 
-    // Validate year input (1924-2024)
-    if (year < 1924 || year > 2024 || isNaN(year)) {
+    // Validate year input (1924-current year)
+    if (year < 1924 || year > currentYear || isNaN(year)) {
         yearInput.value = ""; // Clear the input if invalid
     }
 
@@ -37,7 +39,6 @@ function validateInputs() {
         displayEmptyAge(); // If inputs are invalid, reset the display
     }
 }
-
 
 function isValidDate(day, month, year) {
     // Check if date is valid by constructing a Date object and checking its properties
@@ -80,3 +81,4 @@ function displayEmptyAge() {
     document.querySelectorAll(".age-output")[1].textContent = '--';
     document.querySelectorAll(".age-output")[2].textContent = '--';
 }
+
